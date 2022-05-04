@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".driverDocumentsFragment"
+    android:id="@+id/doc_driv">
+
+    <LinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginVertical="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <ImageButton
+            android:id="@+id/back_button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="30dp"
+            android:background="@android:color/transparent"
+            android:backgroundTint="#E5E5E5"
+            android:src="@drawable/backbuttonimg" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|top"
+        android:text="Driver Details"
+        android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="25dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="25dp">
+
+
+            <!--        <FrameLayout-->
+            <!--            android:id="@+id/child_fragment_container"-->
+            <!--            android:layout_width="412dp"-->
+            <!--            android:layout_height="593dp"-->
+            <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--            app:layout_constraintEnd_toEndOf="@id/relativeLayout"-->
+            <!--            app:layout_constraintHorizontal_bias="0.0"-->
+            <!--            app:layout_constraintStart_toStartOf="@id/relativeLayout"-->
+            <!--            app:layout_constraintTop_toTopOf="@id/relativeLayout"-->
+            <!--            app:layout_constraintVertical_bias="1.0" />-->
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView0"
+                android:layout_width="357dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/drvierlicense"
+                android:textColor="#444549"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.425"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fooFragment"
+                android:name="com.transport.khata.EditDocumentFragment"
+                android:layout_width="411dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView0" />
+
+            <Button
+                android:id="@+id/searchContacts"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/search_contacts"
+                android:textColor="#1C439D"
+                android:textSize="13sp"
+                app:icon="@drawable/search_contacts"
+                app:iconTint="#1C439D"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.115"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fooFragment" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView"
+                android:layout_width="357dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/enter_driver_name"
+                android:textColor="#444549"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchContacts" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="364dp"
+                android:layout_height="52dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.51"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/driverNameEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#515151" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView1"
+                android:layout_width="357dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="@string/enter_driver_phone"
+                android:textColor="#444549"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.444"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout3"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="364dp"
+                android:layout_height="52dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.489"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/driverPhoneNoEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#515151" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/custom_border"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="288dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="15dp"
+                    android:text="Add Document"
+                    android:textColor="#444549"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00FFFFFF"
+                    app:srcCompat="@drawable/ic_add_trip" />
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="10dp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/saveDriver"
+                android:layout_width="355dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="35dp"
+                android:backgroundTint="#1C439D"
+                android:text="Save"
+                app:cornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</FrameLayout>

@@ -1,0 +1,101 @@
+{
+  "project_info": {
+    "project_number": "824244579973",
+    "firebase_url": "https://transportkhata-fcc6e-default-rtdb.firebaseio.com",
+    "project_id": "transportkhata-fcc6e",
+    "storage_bucket": "transportkhata-fcc6e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:824244579973:android:e660fea65117dd9d0703ec",
+        "android_client_info": {
+          "package_name": "com.transport.khata"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "824244579973-0926niq7g1muotnhieo62qbar6ib4ccd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.transport.khata",
+            "certificate_hash": "d814a5037a565b81107346edc81c26e1cdee3fcb"
+          }
+        },
+        {
+          "client_id": "824244579973-k9ch3osl0f86rp3njoj12luci7nhk93b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.transport.khata",
+            "certificate_hash": "0a7e80c7a022bb03bd63162de3ef4f1d56df9900"
+          }
+        },
+        {
+          "client_id": "824244579973-bt5pde1vccaivuu9ni1oo6lj0gskgkrv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgszCQwAozOvGmK0VnywOv0R2OrhAmjZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "824244579973-bt5pde1vccaivuu9ni1oo6lj0gskgkrv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:824244579973:android:f2ac2638a566ff180703ec",
+        "android_client_info": {
+          "package_name": "com.transpot.khata"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "824244579973-eqoejr6je5uka4gv83oo2ko5q6eoa59b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.transpot.khata",
+            "certificate_hash": "0a7e80c7a022bb03bd63162de3ef4f1d56df9900"
+          }
+        },
+        {
+          "client_id": "824244579973-r113vaqaivvroos1i6ha66rs4q2hti7p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.transpot.khata",
+            "certificate_hash": "d814a5037a565b81107346edc81c26e1cdee3fcb"
+          }
+        },
+        {
+          "client_id": "824244579973-bt5pde1vccaivuu9ni1oo6lj0gskgkrv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgszCQwAozOvGmK0VnywOv0R2OrhAmjZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "824244579973-bt5pde1vccaivuu9ni1oo6lj0gskgkrv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

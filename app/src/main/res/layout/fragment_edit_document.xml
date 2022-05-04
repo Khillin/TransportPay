@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditDocumentFragment"
+    android:id="@+id/containerEditDocument">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/custom_border"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/accordion_btn1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="#F1F1F1"
+                        android:gravity="center"
+                        android:paddingLeft="50dp"
+                        android:paddingRight="50dp"
+                        android:text="Front Side"
+                        android:textColor="#222121">
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="135dp"
+                            android:layout_height="109dp"
+                            android:src="@drawable/ic_baseline_drive_eta_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.17000002" />
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="44dp"
+                            android:text="Front picture"
+                            app:layout_constraintEnd_toStartOf="@+id/imageView4"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toEndOf="@+id/imageView2"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView4"
+                            android:layout_width="28dp"
+                            android:layout_height="18dp"
+                            android:backgroundTint="#000000"
+                            android:src="@drawable/ic_add_trip"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/accordian1"
+                        android:layout_width="match_parent"
+                        android:layout_height="390dp"
+                        android:background="#FFFFFF"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:orientation="vertical"
+                        android:paddingBottom="25dp">
+
+                        <ImageView
+                            android:id="@+id/click_image"
+                            android:layout_width="350dp"
+                            android:layout_height="450dp"
+                            android:layout_marginTop="28dp"
+                            android:background="#9AB6B6B6"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:text="or"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/camera_button" />
+
+                        <Button
+                            android:id="@+id/uploadFromDeviceFront"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="338dp"
+                            android:layout_height="53dp"
+                            android:layout_marginTop="40dp"
+                            android:text="Upload from device"
+                            android:textColor="#1C439D"
+                            app:cornerRadius="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.529"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView4"
+                            app:strokeColor="#1C439D" />
+
+
+                        <!--                    <ImageButton-->
+                        <!--                        android:id="@+id/uploadFromDeviceFront"-->
+                        <!--                        android:layout_width="257dp"-->
+                        <!--                        android:layout_height="40dp"-->
+                        <!--                        android:layout_marginTop="48dp"-->
+                        <!--                        android:src="@drawable/upload_from_phone"-->
+                        <!--                        app:layout_constraintEnd_toEndOf="parent"-->
+                        <!--                        app:layout_constraintHorizontal_bias="0.497"-->
+                        <!--                        app:layout_constraintStart_toStartOf="parent"-->
+                        <!--                        app:layout_constraintTop_toTopOf="@+id/textView4" />-->
+
+                        <LinearLayout
+                            android:id="@+id/camera_button"
+                            android:layout_width="364dp"
+                            android:layout_height="202dp"
+                            android:layout_marginTop="52dp"
+                            android:background="#0A444549"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingLeft="50dp"
+                            android:paddingRight="50dp"
+                            android:text="Open camera"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.489"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/addimageView"
+                                android:layout_width="167dp"
+                                android:layout_height="109dp"
+                                android:layout_gravity="center_horizontal"
+                                android:padding="10dp"
+                                android:src="@drawable/image_preview" />
+
+                            <!--                        <TextView-->
+                            <!--                            android:layout_width="wrap_content"-->
+                            <!--                            android:layout_height="50dp"-->
+                            <!--                            android:text="Open camera to click the photo" />-->
+
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/custom_border"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/accordion_btn2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="#F1F1F1"
+                        android:paddingLeft="50dp"
+                        android:paddingRight="50dp"
+                        android:text="Back Side"
+                        android:textColor="#222121">
+
+                        <ImageView
+                            android:id="@+id/imageView3"
+                            android:layout_width="135dp"
+                            android:layout_height="109dp"
+                            android:src="@drawable/ic_baseline_drive_eta_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="44dp"
+                            android:text="Back picture"
+                            app:layout_constraintStart_toEndOf="@+id/imageView3"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_add_trip"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toEndOf="@+id/imageView3"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.494" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/accordian2"
+                        android:layout_width="match_parent"
+                        android:layout_height="385dp"
+                        android:background="#FFFFFF"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/click_image_back"
+                            android:layout_width="350dp"
+                            android:layout_height="450dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="70dp"
+                            android:layout_marginBottom="10dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/camera_button_back" />
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="28dp"
+                            android:text="or"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/camera_button_back" />
+
+                        <Button
+                            android:id="@+id/uploadFromDeviceBack"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="338dp"
+                            android:layout_height="53dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Upload from device"
+                            android:textColor="#1C439D"
+                            app:cornerRadius="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView5"
+                            app:strokeColor="#1C439D" />
+
+                        <LinearLayout
+                            android:id="@+id/camera_button_back"
+                            android:layout_width="348dp"
+                            android:layout_height="179dp"
+                            android:layout_marginTop="44dp"
+                            android:background="#0A444549"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingLeft="50dp"
+                            android:paddingRight="50dp"
+                            android:text="Open camera back"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/addimageViewBack"
+                                android:layout_width="167dp"
+                                android:layout_height="109dp"
+                                android:layout_gravity="center_horizontal"
+                                android:padding="10dp"
+                                android:src="@drawable/image_preview" />
+
+                            <!--                        <TextView-->
+                            <!--                            android:layout_width="wrap_content"-->
+                            <!--                            android:layout_height="50dp"-->
+                            <!--                            android:text="Open camera to click the photo" />-->
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+
+                <!--                        <EditText-->
+                <!--                            android:id="@+id/truckType"-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:text="truckType" />-->
+
+                <!--                        <Button-->
+                <!--                            android:id="@+id/changeTypeBtn"-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_weight="1"-->
+                <!--                            android:text="Change Type" />-->
+
+
+                <!--                <com.google.android.material.textview.MaterialTextView-->
+                <!--                    android:layout_width="357dp"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginStart="0dp"-->
+                <!--                    android:layout_marginLeft="0dp"-->
+                <!--                    android:layout_marginTop="20dp"-->
+                <!--                    android:text="@string/enter_truck_number"-->
+                <!--                    android:textStyle="bold"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+                <!--                <RelativeLayout-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content">-->
+
+                <!--                <com.google.android.material.textfield.TextInputLayout-->
+                <!--                    android:id="@+id/textInputLayout2"-->
+                <!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginLeft="25dp"-->
+                <!--                    android:layout_marginTop="0dp"-->
+                <!--                    android:layout_marginRight="25dp"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+                <!--                    <com.google.android.material.textfield.TextInputEditText-->
+                <!--                        android:id="@+id/truckNo"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:editable="false"-->
+                <!--                        android:textColor="#515151" />-->
+                <!--                </com.google.android.material.textfield.TextInputLayout>-->
+
+                <!--                    <Button-->
+                <!--                        android:id="@+id/makeEditableTType"-->
+                <!--                        style="@style/Widget.MaterialComponents.Button.TextButton"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_alignStart="@+id/textInputLayout2"-->
+                <!--                        android:layout_alignTop="@+id/textInputLayout2"-->
+                <!--                        android:layout_alignRight="@+id/textInputLayout2"-->
+                <!--                        android:layout_alignBottom="@+id/textInputLayout2"-->
+                <!--                        android:layout_marginStart="218dp"-->
+                <!--                        android:padding="5dp"-->
+                <!--                        android:text="change Number"-->
+                <!--                        android:textColor="#2E2E2E" />-->
+                <!--                </RelativeLayout>-->
+
+
+                <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:layout_marginTop="20dp"-->
+                <!--                    android:gravity="fill_horizontal"-->
+                <!--                    android:orientation="horizontal">-->
+
+                <!--                    <Spinner-->
+                <!--                        android:id="@+id/truckTypeDropdown"-->
+                <!--                        android:layout_width="125dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="36dp"-->
+                <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                        app:layout_constraintStart_toStartOf="parent"-->
+                <!--                        app:layout_constraintTop_toTopOf="parent"-->
+                <!--                        app:layout_constraintVertical_bias="0.47" />-->
+
+                <!--                    <Button-->
+                <!--                        android:id="@+id/changeTruckType"-->
+                <!--                        style="@style/Widget.MaterialComponents.Button.TextButton"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="100dp"-->
+                <!--                        android:text="Change Type"-->
+                <!--                        android:textColor="#222121"-->
+                <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                        app:layout_constraintStart_toEndOf="@+id/truckTypeDropdown"-->
+                <!--                        app:layout_constraintTop_toTopOf="parent"-->
+                <!--                        app:layout_constraintVertical_bias="0.0" />-->
+
+                <!--                    &lt;!&ndash;                    <Button&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                        android:id="@+id/changeNumberBtn"&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                        android:layout_weight="1"&ndash;&gt;-->
+                <!--                    &lt;!&ndash;                        android:text="Change Number" />&ndash;&gt;-->
+
+                <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+                <!--                <Button-->
+                <!--                    android:id="@+id/submitEditTruck"-->
+                <!--                    android:layout_width="335dp"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="25dp"-->
+                <!--                    android:layout_marginBottom="25dp"-->
+                <!--                    android:background="#1F79CC"-->
+                <!--                    android:backgroundTint="#717F8C"-->
+                <!--                    android:text="Save changes" />-->
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</FrameLayout>

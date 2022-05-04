@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewJobActivity"
+    android:id="@+id/viewJobActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginVertical="5dp"
+        >
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/backbuttonimg"
+            android:background="@android:color/transparent"
+            android:backgroundTint="#E5E5E5"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|top"
+            android:text="Details"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topbar"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="2dp"
+        android:layout_marginHorizontal="16dp"
+        android:gravity="top"
+        android:text="Add Advance"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/layout_advance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/backgroundbox"
+        android:layout_below="@+id/label"
+        android:layout_marginHorizontal="16dp">
+
+        <TextView
+            android:id="@+id/rupee_symbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="\u20B9"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="5dp"
+            android:gravity="top"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"/>
+
+        <TextView
+            android:id="@+id/advance_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/rupee_symbol"
+            android:gravity="top"
+            android:text="0"
+            android:textSize="12dp"
+            android:cursorVisible="true"/>
+
+        <EditText
+            android:id="@+id/advance_amount_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/rupee_symbol"
+            android:background="@null"
+            android:cursorVisible="true"
+            android:gravity="top"
+            android:text="0"
+            android:textSize="12dp"
+            android:visibility="gone"/>
+
+
+        <TextView
+            android:id="@+id/edit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:textColor="#1C439D"
+            android:textSize="12dp"
+            android:gravity="top"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:id="@+id/save_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:textColor="#1C439D"
+            android:textSize="12dp"
+            android:gravity="top"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/bill_amount_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_advance"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="16dp"
+        android:gravity="top"
+        android:text="Bill Amount"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/bill_amt_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/backgroundbox"
+        android:layout_below="@+id/bill_amount_label"
+        android:layout_marginHorizontal="16dp">
+
+        <TextView
+            android:id="@+id/rupee_symbol2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="\u20B9"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="5dp"
+            android:gravity="top"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"/>
+
+        <TextView
+            android:id="@+id/bill_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/rupee_symbol2"
+            android:gravity="top"
+            android:text="0"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/bill_amount_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/rupee_symbol2"
+            android:gravity="top"
+            android:text="0"
+            android:textSize="12dp"
+            android:visibility="gone"
+            android:background="@null"/>
+
+        <TextView
+            android:id="@+id/ba_edit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:textColor="#1C439D"
+            android:textSize="12dp"
+            android:gravity="top"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/ba_save_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:textColor="#1C439D"
+            android:textSize="12dp"
+            android:gravity="top"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/camera_detail_o"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginVertical="10dp"
+        android:layout_below="@+id/bill_amt_layout"
+        android:layout_marginHorizontal="16dp"
+        android:background="@drawable/backgroundbox">
+
+        <ImageView
+            android:id="@+id/camera_image_o"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:background="@drawable/backgroundcard"
+            android:padding="20dp"
+            android:src="@drawable/image_preview" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="or"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginVertical="10dp"/>
+        <Button
+            android:id="@+id/gallery_button_o"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="Upload from Device"
+            android:textColor="#1C439D"
+            android:textAlignment="center"
+            android:backgroundTint="#E5E5E5"/>
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/camera_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/camera_detail_o"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="2dp"
+        app:contentPadding="20dp">
+
+        <LinearLayout
+            android:id="@+id/camera_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/camera_short"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:text="Add Document"
+                    android:textColor="#1C439D" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:foregroundGravity="center_vertical"
+                    android:padding="5dp"
+                    android:src="@drawable/add_doc" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/camera_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/camera_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:background="@drawable/backgroundcard"
+                    android:padding="20dp"
+                    android:src="@drawable/photo_camera" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginVertical="10dp"
+                    android:text="or"
+                    android:textAlignment="center" />
+
+                <Button
+                    android:id="@+id/gallery_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#EDEDEB"
+                    android:padding="20dp"
+                    android:text="Upload from Device"
+                    android:textAlignment="center"
+                    android:textColor="#1C439D" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/trip_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill"
+        android:layout_rowWeight="1"
+        android:backgroundTint="#FFFFFF"
+        android:layout_marginTop="5dp"
+        android:layout_columnWeight="1"
+        android:layout_below="@+id/camera_card"
+        app:cardCornerRadius="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:background="@drawable/view_trips_box"
+        app:cardElevation="2dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="2dp"
+                android:layout_gravity="center_vertical|center_horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorTextPrimary"
+                        android:text="Party Name"
+                        android:textSize="10sp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center_vertical" />
+
+                    <TextView
+                        android:id="@+id/party_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorTextPrimary"
+                        android:text="Sharma Tech"
+                        android:textSize="14sp"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/trip_status_bg">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/green_circle"
+                        android:layout_gravity="center_vertical"
+                        android:padding="3dp"/>
+
+                    <TextView
+                        android:id="@+id/trip_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textEnd"
+                        android:padding="5dp"
+                        android:text="LR Recieved"
+                        android:textColor="#2AA369"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/underline"
+                android:layout_marginVertical="5dp"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="2dp"
+                android:layout_gravity="center_vertical|center_horizontal">
+
+                <LinearLayout
+                    android:id="@+id/origin_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:textColor="@color/colorTextPrimary"
+                        android:foregroundGravity="center_vertical"
+                        android:text="Origin" />
+
+                    <TextView
+                        android:id="@+id/origin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:textColor="@color/colorTextPrimary"
+                        android:foregroundGravity="center_vertical"
+                        android:textStyle="bold"
+                        android:text="Mumbai" />
+
+                    <TextView
+                        android:id="@+id/start_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10sp"
+                        android:textColor="@color/colorTextPrimary"
+                        android:padding="5dp"
+                        android:foregroundGravity="center_vertical"
+                        android:text="12-04-1996" />
+
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/arrow_1"
+                    android:layout_width="166dp"
+                    android:layout_height="1dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_toRightOf="@+id/origin_layout"
+                    android:background="@drawable/arrow1" />
+
+                <ImageView
+                    android:id="@+id/vector_27"
+                    android:layout_width="3.5dp"
+                    android:layout_height="7dp"
+                    android:layout_marginTop="26.5dp"
+                    android:layout_toRightOf="@+id/arrow_1"
+                    android:background="@drawable/arrow_mark" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:foregroundGravity="center_vertical"
+                    android:layout_alignParentRight="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:textColor="@color/colorTextPrimary"
+                        android:foregroundGravity="center_vertical"
+                        android:text="Destination" />
+
+                    <TextView
+                        android:id="@+id/destination"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:textColor="@color/colorTextPrimary"
+                        android:foregroundGravity="center_vertical"
+                        android:textStyle="bold"
+                        android:text="Hyderabad" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/underline"
+                android:layout_marginVertical="5dp"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/drivers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/trip_card"
+        android:text="Drivers"
+        android:textStyle="bold"
+        android:textColor="#444549"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"/>
+
+    <RelativeLayout
+        android:id="@+id/drivers_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/drivers"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/driver_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#949496"
+            android:text="Driver Name"
+            android:layout_alignParentLeft="true"
+            />
+
+        <TextView
+            android:id="@+id/truck_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#949496"
+            android:text="Truck No."
+            android:layout_centerInParent="true"
+            />
+
+        <TextView
+            android:id="@+id/contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#949496"
+            android:text="Contact"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+
+
+        <ListView
+            android:id="@+id/list_driver_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="2dp"
+            android:layout_below="@+id/drivers_header"
+            android:divider="#ffff"
+            android:dividerHeight="2dp"
+            android:clickable="true"/>
+
+    </RelativeLayout>
+
+
+
+</ScrollView>

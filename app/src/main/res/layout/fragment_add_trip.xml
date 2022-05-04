@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".AddTripFragment">
+
+
+<TextView
+    android:id="@+id/create_job"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:text="@string/create_trip"
+    android:textColor="@color/colortextfirst"
+    android:textSize="22sp"
+    android:textStyle="bold"
+    android:gravity="center"
+    android:background="@drawable/backgroundbox_blue"
+    />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:backgroundTint="#E5E5E5"
+            android:layout_marginHorizontal="30dp">
+
+            <TextView
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:textColor="@color/colorTextPrimary"
+                android:text="Party Name"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/party_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/backgroundbox"
+                android:hint="@string/enter_party_name"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:layout_marginBottom="4dp"
+                android:textAlignment="center"
+                android:textColor="@color/colortextsecond"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/truck_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/trucks_info"
+                android:textColor="@color/colorTextPrimary"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/List_truck_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/backgroundcard"
+                android:layout_marginVertical="2dp"
+                android:divider="#ffff"
+                android:dividerHeight="2dp" >
+            </ListView>
+
+            <LinearLayout
+                android:id="@+id/truck_info_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:background="@drawable/backgroundcard">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginVertical="5dp">
+
+                    <ImageView
+                        android:id="@+id/number_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="2dp"
+                        android:src="@drawable/number_icon" />
+
+                    <TextView
+                        android:id="@+id/number_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_toRightOf="@+id/number_icon"
+                        android:text="No. "
+                        android:textColor="@color/colorTextPrimary"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/no_of_truck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_toRightOf="@+id/number_text"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextPrimary"
+                    android:text="Truck Registered Number"
+                    android:layout_marginHorizontal="5dp"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"
+                    />
+
+                <Spinner
+                    android:id="@+id/truck_reg_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/backgroundbox"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginHorizontal="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextPrimary"
+                    android:text="Driver Name"
+                    android:layout_marginHorizontal="5dp"
+                    android:textSize="12sp"
+                    android:layout_marginTop="5dp"
+                    />
+
+                <EditText
+                    android:id="@+id/driver_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Driver Name"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@drawable/backgroundbox"
+                    android:layout_marginLeft="2dp"/>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextPrimary"
+                    android:text="Driver Mobile Number"
+                    android:layout_marginHorizontal="5dp"
+                    android:gravity="top"
+                    android:textSize="12sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    />
+
+                <EditText
+                    android:id="@+id/driver_mob_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="9887454567"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginTop="11dp"
+                    android:maxLength="10"
+                    android:background="@drawable/backgroundbox"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginBottom="5dp"/>
+
+                <ImageButton
+                    android:id="@+id/add_more_truck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/add_button_sm"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:tooltipText="Add"
+                    android:contentDescription="Add"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/journey_dtl_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/truck_info_layout"
+                android:background="@drawable/backgroundcard">
+
+
+                <TextView
+                    android:id="@+id/journey_dtl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextPrimary"
+                    android:text="@string/journey_dtl"
+                    android:layout_marginHorizontal="5dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trip_start_date"
+                    android:textColor="@color/colorTextPrimary"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginTop="5dp"
+                    />
+
+<!--                <EditText-->
+<!--                    android:id="@+id/start_date"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:inputType="date"-->
+<!--                    android:layout_marginTop="11dp"-->
+<!--                    android:hint="i.e 12-04-2022"-->
+<!--                    android:layout_marginHorizontal="5dp"-->
+<!--                    android:background="@drawable/backgroundbox"-->
+<!--                    android:layout_marginLeft="2dp"/>-->
+
+                <TextView
+                    android:id="@+id/start_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11dp"
+                    android:text="Select Date"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@drawable/backgroundbox"
+                    android:layout_marginLeft="2dp"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Origin"
+                    android:layout_marginHorizontal="5dp"
+                    android:textColor="@color/colorTextPrimary"
+                    android:layout_marginTop="5dp"
+                    />
+
+                <EditText
+                    android:id="@+id/origin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@drawable/backgroundbox"
+                    android:hint="Origin Address" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Destination"
+                    android:layout_marginHorizontal="5dp"
+                    android:textColor="@color/colorTextPrimary"
+                    android:layout_marginTop="5dp"
+                    />
+
+                <EditText
+                    android:id="@+id/destination"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@drawable/backgroundbox"
+                    android:hint="Destination Address" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bill_amount_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/journey_dtl_layout"
+                android:background="@drawable/backgroundcard">
+
+
+                <TextView
+                    android:id="@+id/bill_amount_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Bill_info"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textStyle="bold"
+                    android:layout_marginHorizontal="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Bill_amount"
+                    android:textSize="12sp"
+                    android:layout_marginHorizontal="5dp"
+                    android:textColor="@color/colorTextPrimary"
+                    android:layout_marginTop="5dp"
+                    />
+
+                <EditText
+                    android:id="@+id/bill_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:inputType="numberDecimal"
+                    android:hint="Bill amount"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@drawable/backgroundbox"
+                    android:layout_marginLeft="2dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Bill_type"
+                    android:layout_marginHorizontal="5dp"
+                    android:textColor="@color/colorTextPrimary"
+                    android:layout_marginTop="5dp"
+                    />
+
+                <EditText
+                    android:id="@+id/bill_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:hint="Bill Type"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/backgroundbox"
+                    android:layout_marginLeft="2dp"/>
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/camera_card"
+                android:onClick="expand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="20dp">
+                <LinearLayout
+                    android:id="@+id/camera_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/camera_short"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:padding="5dp"
+                            android:text="Add Document" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:foregroundGravity="center_vertical"
+                            android:padding="5dp"
+                            android:src="@drawable/add_doc" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/camera_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/camera_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:background="@drawable/backgroundcard"
+                            android:src="@drawable/photo_camera"
+                            android:padding="20dp"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="or"
+                            android:textAlignment="center"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginVertical="10dp"/>
+                        <Button
+                            android:id="@+id/gallery_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="20dp"
+                            android:text="Gallery"
+                            android:textColor="#7E7B7B"
+                            android:textAlignment="center"
+                            android:backgroundTint="#EDEDEB"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/create_trip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:text="@string/create_trip"
+                android:backgroundTint="#1C439D"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bill_amount_layout" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

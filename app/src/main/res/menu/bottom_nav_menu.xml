@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/home_fragment" android:title="@string/home" android:icon="@drawable/ic_home"
+        android:enabled="true"     app:labelVisibilityMode="labeled" />
+    <item android:id="@+id/add_trip_fragment" android:title="@string/trips" android:icon="@drawable/ic_add_trip"
+        android:enabled="true"     app:labelVisibilityMode="labeled" />
+    <item
+        android:id="@+id/view_trip_fragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_view_jobs"
+        android:title="@string/view"
+        android:visible="true"
+        app:labelVisibilityMode="labeled" />
+    <item android:id="@+id/my_truck_fragment" android:title="@string/trucks" android:icon="@drawable/ic_baseline_my_truck"/>
+</menu>

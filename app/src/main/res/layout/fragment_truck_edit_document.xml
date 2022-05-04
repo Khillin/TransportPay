@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TruckEditDocumentFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fooFragment"
+                android:name="com.transport.khata.EditDocumentFragment"
+                android:layout_width="411dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="357dp"
+                android:layout_height="wrap_content"
+                android:text="@string/truck_details"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fooFragment"
+                app:layout_constraintVertical_bias="0.42" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView2"
+                android:layout_width="357dp"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_truck_number"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fooFragment"
+                app:layout_constraintVertical_bias="0.923" />
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fooFragment"
+                app:layout_constraintVertical_bias="0.194">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout2"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="25dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/truckNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:textColor="#252525" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/makeEditableTType"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textInputLayout2"
+                    android:layout_alignTop="@+id/textInputLayout2"
+                    android:layout_alignEnd="@+id/textInputLayout2"
+                    android:layout_alignRight="@+id/textInputLayout2"
+                    android:layout_alignBottom="@+id/textInputLayout2"
+                    android:layout_marginStart="218dp"
+                    android:layout_marginEnd="6dp"
+                    android:padding="2dp"
+                    android:text="change Number"
+                    android:textColor="#1C439D"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="357dp"
+                android:layout_height="wrap_content"
+                android:text="@string/truck_type"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
+                app:layout_constraintVertical_bias="0.813" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="fill_horizontal"
+
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
+                app:layout_constraintVertical_bias="0.193">
+
+                <!--            <Spinner-->
+                <!--                android:id="@+id/truckTypeDropdown"-->
+                <!--                android:layout_width="125dp"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginStart="36dp"-->
+                <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                app:layout_constraintStart_toStartOf="parent"-->
+                <!--                app:layout_constraintTop_toTopOf="parent"-->
+                <!--                app:layout_constraintVertical_bias="0.47" />-->
+
+                <!--            <Button-->
+                <!--                android:id="@+id/changeTruckType"-->
+                <!--                style="@style/Widget.MaterialComponents.Button.TextButton"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginStart="100dp"-->
+                <!--                android:text="Change Type"-->
+                <!--                android:textColor="#1C439D"-->
+                <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                app:layout_constraintStart_toEndOf="@+id/truckTypeDropdown"-->
+                <!--                app:layout_constraintTop_toTopOf="parent"-->
+                <!--                app:layout_constraintVertical_bias="0.0" />-->
+
+                <!--                    <Button-->
+                <!--                        android:id="@+id/changeNumberBtn"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_weight="1"-->
+                <!--                        android:text="Change Number" />-->
+
+                <!--            <LinearLayout-->
+                <!--                android:id="@+id/linearLayout2"-->
+                <!--                android:layout_width="359dp"-->
+                <!--                android:layout_height="61dp"-->
+                <!--                android:layout_marginTop="55dp"-->
+                <!--                android:gravity="center|center_horizontal"-->
+                <!--                android:orientation="horizontal"-->
+                <!--                app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                app:layout_constraintHorizontal_bias="0.491"-->
+                <!--                app:layout_constraintStart_toStartOf="parent"-->
+                <!--                app:layout_constraintTop_toBottomOf="parent">-->
+
+                <!--            <EditText-->
+                <!--                android:layout_width="0dp"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginLeft="10dp"-->
+                <!--                android:layout_marginTop="20dp"-->
+                <!--                android:layout_marginRight="10dp"-->
+                <!--                android:layout_weight="1"-->
+                <!--                android:text="1" />-->
+
+                <Button
+                    android:id="@+id/truckType1"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:padding="9dp"
+                    android:text="@string/truck_type_0"
+                    android:textColor="#212121"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/truckType3"
+                    app:layout_constraintStart_toEndOf="@+id/truckType2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/truckType1"
+                    app:layout_constraintStart_toEndOf="@+id/truckType2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/truckType2"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="108dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="28dp"
+                    android:text="@string/truck_type_1"
+                    android:textColor="#212121"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/truckType3"
+                    app:layout_constraintStart_toEndOf="@+id/truckType1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!--            <EditText-->
+                <!--                android:layout_width="0dp"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginLeft="10dp"-->
+                <!--                android:layout_marginTop="20dp"-->
+                <!--                android:layout_marginRight="10dp"-->
+                <!--                android:layout_weight="1"-->
+                <!--                android:text="1" />-->
+
+                <Button
+                    android:id="@+id/truckType3"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="109dp"
+                    android:layout_height="62dp"
+                    android:layout_marginEnd="28dp"
+                    android:text="@string/truck_type_2"
+                    android:textColor="#212121"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!--            <EditText-->
+                <!--                android:layout_width="0dp"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_marginLeft="10dp"-->
+                <!--                android:layout_marginTop="20dp"-->
+                <!--                android:layout_marginRight="10dp"-->
+                <!--                android:layout_weight="1"-->
+                <!--                android:text="1" />-->
+                <!--            </LinearLayout>-->
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="0dp"
+                android:layout_height="68dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/custom_border"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="288dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="15dp"
+                    android:text="Add Document"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00FFFFFF"
+                    app:srcCompat="@drawable/ic_add_trip" />
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="10dp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/submitEditTruck"
+                android:layout_width="335dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:backgroundTint="#1C439D"
+                android:text="Save changes"
+                app:cornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</FrameLayout>

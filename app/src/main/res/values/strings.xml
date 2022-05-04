@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">TransportKhata</string>
+    <string name="We_will_send_you_one_time_otp_on_the_given_mobile_number">TransportKhata</string>
+    <string name="Enter_Mobile_number">Enter Mobile number</string>
+    <string name="otp_verification">TransportKhata</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_home">Home</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="create_trip">Create Trip</string>
+    <string name="enter_party_name">Enter Party Name</string>
+    <string name="trucks_info">Trucks Info</string>
+    <string name="trucks_reg_no">Truck Registered Number</string>
+    <string name="driver_name">Driver Name</string>
+    <string name="journey_dtl">Journey Details</string>
+    <string name="trip_start_date">Start Date</string>
+    <string name="Origin">Origin</string>
+    <string name="Destination">Destination</string>
+    <string name="Bill_amount">Bill Amount</string>
+    <string name="Bill_info">Bill Information</string>
+    <string name="Bill_type">Bill Type</string>
+
+    <string name="extended_fab_content_desc">Add new Truck</string>
+
+    <string name="extended_fab_label">Add new Truck</string>
+
+    <string name="dummy_button">Dummy Button</string>
+
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_driver_list">DriverListActivity</string>
+
+    <string name="label">Driver name</string>
+
+    <string name="truck_type_2">Truck type 2</string>
+
+    <string name="truck_type_1">Truck type 1</string>
+
+    <string name="truck_type_0">Tonnes</string>
+
+    <string name="enter_truck_number">Enter Truck number</string>
+
+    <string name="truck_type">Truck Type</string>
+
+    <string name="add_driver">Add Driver</string>
+
+    <string name="driver_number">Driver number</string>
+
+    <string name="done">Done</string>
+
+    <string name="add_truck">Add Truck</string>
+    <string name="enter_driver_name">Enter Driver name</string>
+    <string name="enter_driver_phone">Enter Phone number</string>
+    <string name="search_contacts">Search Contacts</string>
+    <string name="drvierlicense">Upload drivers license</string>
+    <string name="view_invoice">View Invoice</string>
+    <string name="request_payment">Request Payment</string>
+    <string name="truck_details">Truck Details</string>
+    <string name="home">Home</string>
+
+    <string name="trips">Trips</string>
+    <string name="view">View</string>
+    <string name="trucks">Trucks</string>
+    <string name="pay_salary">Pay</string>
+
+    <string-array name="moreOptions">
+        <item>Edit</item>
+    </string-array>
+
+    <string-array name="numbers">
+        <item>one</item>
+        <item>two</item>
+        <item>three</item>
+        <item>four</item>
+        <item>five</item>
+    </string-array>
+
+
+</resources>

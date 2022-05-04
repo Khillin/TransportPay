@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/driver_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:textSize="14sp"
+        android:textColor="#444549"
+        android:layout_alignParentTop="true"
+        android:text="Ravi Sharma"/>
+
+    <TextView
+        android:id="@+id/regdno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:textSize="14sp"
+        android:textColor="#444549"
+        android:text="RJ-EF-3958"/>
+
+    <ImageView
+        android:id="@+id/image_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/driver_phone_icon"
+        android:layout_alignParentRight="true"/>
+
+
+
+</RelativeLayout>
