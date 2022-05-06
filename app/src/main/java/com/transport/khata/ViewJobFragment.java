@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +27,8 @@ import java.util.ArrayList;
 
 public class ViewJobFragment extends Fragment {
     //ownerId captured
-    String ownerId = FirebaseDatabase.getInstance().getReference().child("owner").child("ownerid1").getKey().toString();
+    String ownerid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    String ownerId = FirebaseDatabase.getInstance().getReference().child("owner").child(ownerid).getKey().toString();
 
     DatabaseReference tripListRef,partyNameRef,originRef,destinationRef,startDateRef,tripRef;
 

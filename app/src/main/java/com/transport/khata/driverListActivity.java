@@ -21,6 +21,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,7 +48,7 @@ public class driverListActivity extends AppCompatActivity {
 
     FirebaseDatabase rootNode;
     DatabaseReference referenceOwner;
-    String ownerid = "ownerid1";
+    String ownerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
 

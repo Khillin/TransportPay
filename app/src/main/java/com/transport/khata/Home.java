@@ -13,6 +13,7 @@ import com.transport.khata.databinding.ActivityHomeBinding;
 public class Home extends AppCompatActivity {
 
     ActivityHomeBinding binding;
+    String ownerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
