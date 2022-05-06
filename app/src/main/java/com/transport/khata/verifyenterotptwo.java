@@ -57,7 +57,7 @@ public class verifyenterotptwo extends AppCompatActivity {
         textview.setText(String.format("+91-%s", getIntent().getStringExtra("mobile")));
 
         getotpbackend = getIntent().getStringExtra("backendotp");
-        ownerId = getIntent().getStringExtra("ownerId");
+
 
         final ProgressBar progressbarVerifyOtp = findViewById(R.id.progressbar_verify_otp);
 
@@ -97,6 +97,7 @@ public class verifyenterotptwo extends AppCompatActivity {
                                     databaseReference.orderByChild("phoneNo").equalTo(phoneNo).addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            ownerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                             if(snapshot.getValue() != null){
                                                 Toast.makeText(getApplicationContext(), "You are Already registered with us, Welcome Back", Toast.LENGTH_SHORT).show();
                                                 Intent intent = new Intent(getApplicationContext(), Home.class);
