@@ -16,6 +16,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,7 +37,9 @@ import java.util.Iterator;
 
 public class ViewJobActivity extends AppCompatActivity {
 
-    String ownerId = FirebaseDatabase.getInstance().getReference().child("owner").child("ownerid1").getKey().toString();
+    String ownerid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+    String ownerId = FirebaseDatabase.getInstance().getReference().child("owner").child(ownerid).getKey().toString();
 
     ImageButton Back;
     TextView editBtn, saveBtn, advAmt, advAmtEdit,

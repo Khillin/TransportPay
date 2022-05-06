@@ -40,6 +40,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -88,7 +89,7 @@ public class AddTripFragment extends Fragment implements AdapterView.OnItemSelec
     Button createTrip, galleryButton;
     Spinner spinner;
     ImageButton addMoreTruck;
-    String ownerId = FirebaseDatabase.getInstance().getReference().child("owner").child("ownerid1").getKey().toString();
+    String ownerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     LinearLayout truckInfoLayout, cameraDetail,cameraLayout ;
     CardView card;
     ImageView cameraImage;
@@ -175,7 +176,7 @@ public class AddTripFragment extends Fragment implements AdapterView.OnItemSelec
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot data: snapshot.getChildren()){
-                    String name=data.child("regdno").getValue().toString();
+                    String name=data.child("regdNo").getValue().toString();
                     truckRegdNo.add(name);
                 }
                 adapter.notifyDataSetChanged();

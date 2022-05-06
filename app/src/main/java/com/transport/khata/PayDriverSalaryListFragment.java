@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +35,7 @@ public class PayDriverSalaryListFragment extends Fragment {
 
     FirebaseDatabase rootNode;
     DatabaseReference referenceOwner;
-    String ownerid = "ownerid1";
+    String ownerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     Context context;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -108,7 +109,7 @@ public class PayDriverSalaryListFragment extends Fragment {
 //                driverListClass drivers = dataSnapshot.child("ownerid1").child("drivers").getValue(driverListClass.class);
                 driverDetails.clear();
                 listview.setAdapter(null);
-                for (DataSnapshot snapshot : dataSnapshot.child(ownerid).child("drivers").getChildren()) {
+                for (DataSnapshot snapshot : dataSnapshot.child(ownerId).child("drivers").getChildren()) {
                     driverListClass driver = snapshot.getValue(driverListClass.class);
                     driverDetails.add(driver);
                 }

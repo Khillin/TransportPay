@@ -33,6 +33,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.transport.khata.model.driverListClass;
@@ -55,7 +56,7 @@ public class driverDocumentsFragment extends Fragment {
     TextInputEditText driverPhoneNoEdit;
     FirebaseDatabase rootNode;
     DatabaseReference referenceDriver;
-    String ownerId = "ownerid1";
+    String ownerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     String front_rc = "";
     String back_rc = "";
     Button saveDriver;

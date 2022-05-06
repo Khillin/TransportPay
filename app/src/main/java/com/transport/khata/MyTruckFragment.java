@@ -1,5 +1,6 @@
 package com.transport.khata;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,11 +23,17 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.transport.khata.model.DriverHelperClass;
 import com.transport.khata.model.JobHelperClass;
 import com.transport.khata.model.TruckDetails;
+import com.transport.khata.model.driverListAdapter;
+import com.transport.khata.model.driverListClass;
 import com.transport.khata.model.truckDetailsAdapter;
 
 import org.json.JSONException;
@@ -51,7 +58,9 @@ public class MyTruckFragment extends Fragment {
     BottomSheetDialog dialogBuilderTruck;
     Button submit;
     String truckTypeFin;
-    String ownerId = "ownerid1";
+    String ownerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    ArrayList<TruckDetails> truckDetails = new ArrayList();
+    Context context;
 
 
 
@@ -68,15 +77,6 @@ public class MyTruckFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MyTruckFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static MyTruckFragment newInstance(String param1, String param2) {
         MyTruckFragment fragment = new MyTruckFragment();
         Bundle args = new Bundle();
@@ -101,13 +101,16 @@ public class MyTruckFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_truck, container, false);
         View rowView = inflater.inflate(R.layout.row_item, null, false);
+        context = getActivity();
 
         truck = rowView.findViewById(R.id.textView);
         regdNo = rowView.findViewById(R.id.regdNo);
         layout = rowView.findViewById(R.id.LinearLayout);
         listview = view.findViewById(R.id.listview);
         rootNode = FirebaseDatabase.getInstance();
-        referenceJob = rootNode.getReference("Truck");
+        referenceOwner = rootNode.getReference("owner");
+//        referenceJob = rootNode.getReference("Truck");
+        referenceJob = rootNode.getReference("owner").child(ownerId).child("trucks");
         ArrayList<View> viewsArray = new ArrayList();
         ArrayList<TruckDetails> truckDArray = new ArrayList();
         Button OpenBottomSheet = view.findViewById(R.id.open_bottom_sheet);
@@ -121,58 +124,83 @@ public class MyTruckFragment extends Fragment {
                     }
                 });
 
-
-        referenceJob.get().addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                Log.e("firebase", "Error getting data", task.getException());
-            }
-            else {
-                Log.d("firebase", String.valueOf(task.getResult().getValue()));
-//                truck.setText(String.valueOf(task.getResult().getValue()));
-                JSONObject jsonObject = null;
-                ArrayList<String> truckTypeList = new ArrayList(), regdNoList = new ArrayList();
-                try {
-                    jsonObject = new JSONObject(String.valueOf(task.getResult().getValue()).trim());
-                } catch (JSONException e) {
-                    e.printStackTrace();
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                truckDetails.clear();
+                listview.setAdapter(null);
+                for (DataSnapshot snapshot : dataSnapshot.child(ownerId).child("trucks").getChildren()) {
+                    TruckDetails truck = snapshot.getValue(TruckDetails.class);
+                    truckDetails.add(truck);
                 }
-                Iterator<String> keys = jsonObject.keys();
-
-                while(keys.hasNext()) {
-                    String key = keys.next();
-                    try {
-                        if (jsonObject.get(key) instanceof JSONObject) {
-                            String owner = ((JSONObject) jsonObject.get(key)).getString("owner");
-                            String Trucktype = ((JSONObject) jsonObject.get(key)).getString("Trucktype");
-                            String regdNoStr = ((JSONObject) jsonObject.get(key)).getString("regdNo");
-                            TruckDetails truckDetails  = new TruckDetails(owner, Trucktype, regdNoStr);
-                            truckDetails.setOwner(((JSONObject) jsonObject.get(key)).getString("owner"));
-                            truckDetails.setTruckType(((JSONObject) jsonObject.get(key)).getString("Trucktype"));
-                            truckDetails.setRegdNo(((JSONObject) jsonObject.get(key)).getString("regdNo"));
-                            truckTypeList.add(truckDetails.getTruckType());
-                            regdNoList.add(truckDetails.getRegdNo());
-                            truck.setText("Trucktype");
-                            regdNo.setText("regdNoStr");
-                            truckDArray.add(truckDetails);
-                            viewsArray.add(rowView);
-
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                truckDetailsAdapter adapter = new truckDetailsAdapter(getActivity(), truckDArray);
-                listview.setAdapter(adapter);
+                setTruckData();
+                // ..
             }
-        });
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("TAG", "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        referenceOwner.addValueEventListener(postListener);
+//        referenceJob.get().addOnCompleteListener(task -> {
+//            if (!task.isSuccessful()) {
+//                Log.e("firebase", "Error getting data", task.getException());
+//            }
+//            else {
+//                Log.d("firebase", String.valueOf(task.getResult().getValue()));
+////                truck.setText(String.valueOf(task.getResult().getValue()));
+//                JSONObject jsonObject = null;
+//                ArrayList<String> truckTypeList = new ArrayList(), regdNoList = new ArrayList();
+//                try {
+//                    jsonObject = new JSONObject(String.valueOf(task.getResult().getValue()).trim());
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//                Iterator<String> keys = jsonObject.keys();
+//
+//                while(keys.hasNext()) {
+//                    String key = keys.next();
+//                    try {
+//                        if (jsonObject.get(key) instanceof JSONObject) {
+//                            String owner = ownerId;
+//                            String Trucktype = ((JSONObject) jsonObject.get(key)).getString("TruckType");
+//                            String regdNoStr = ((JSONObject) jsonObject.get(key)).getString("regdNo");
+//                            TruckDetails truckDetails  = new TruckDetails(owner, Trucktype, regdNoStr);
+//                            truckDetails.setOwner(owner);
+//                            truckDetails.setTruckType(((JSONObject) jsonObject.get(key)).getString("TruckType"));
+//                            truckDetails.setRegdNo(((JSONObject) jsonObject.get(key)).getString("regdNo"));
+//                            truckTypeList.add(truckDetails.getTruckType());
+//                            regdNoList.add(truckDetails.getRegdNo());
+//                            truck.setText("Trucktype");
+//                            regdNo.setText("regdNoStr");
+//                            truckDArray.add(truckDetails);
+//                            viewsArray.add(rowView);
+//
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                truckDetailsAdapter adapter = new truckDetailsAdapter(getActivity(), truckDArray);
+//                listview.setAdapter(adapter);
+//            }
+//        });
         return view;
+    }
+
+    public void setTruckData(){
+        truckDetailsAdapter adapter = new truckDetailsAdapter(context, truckDetails);
+        listview.setAdapter(adapter);
     }
 
     public void createNewTruckDialogue(){
         dialogBuilderTruck = new BottomSheetDialog(getActivity());
         final View TruckPopupView = getLayoutInflater().inflate(R.layout.add_new_truck,null);
 
-        referenceTruck = rootNode.getReference("Truck");
+        referenceTruck = rootNode.getReference("owner").child(ownerId).child("trucks");
 
         EditText truckNo = TruckPopupView.findViewById(R.id.truck_no);
         MaterialButton truckType1 = TruckPopupView.findViewById(R.id.truckType1);
@@ -224,22 +252,12 @@ public class MyTruckFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                referenceOwner = rootNode.getReference("owner");
-                referenceOwner.child("ownerid1").child("trucks").get().addOnCompleteListener(task -> {
+                referenceOwner.child(ownerId).child("trucks").get().addOnCompleteListener(task -> {
                     if (!task.isSuccessful()) {
                         Log.e("firebase", "Error getting data", task.getException());
                     } else {
                         Log.d("firebase", String.valueOf(task.getResult().getValue()));
-//                truck.setText(String.valueOf(task.getResult().getValue()));
-                        JSONObject jsonObj = null;
                         String truckNumber = truckNo.getText().toString();
-
-                        try {
-                            jsonObj = new JSONObject(String.valueOf(task.getResult().getValue()).trim());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        Iterator<String> keys = jsonObj.keys();
                         TruckDetails truckDetailsClass = new TruckDetails(ownerId, truckTypeFin, truckNumber);
                         referenceTruck.child(truckNumber).setValue(truckDetailsClass);
                         dialogBuilderTruck.dismiss();

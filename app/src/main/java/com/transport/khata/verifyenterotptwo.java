@@ -21,18 +21,28 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.transport.khata.model.CreateTripHelperClass;
+import com.transport.khata.model.Owner;
 
 import java.util.concurrent.TimeUnit;
 
 public class verifyenterotptwo extends AppCompatActivity {
     EditText inputOtp1, inputOtp2, inputOtp3, inputOtp4, inputOtp5, inputOtp6;
-    String getotpbackend;
+    String getotpbackend, ownerId,phoneNo;
     Button verifyButtonClick;
+
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("owner");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verifyenterotptwo);
+        phoneNo=getIntent().getStringExtra("mobile");
 
         final Button verifyButtonClick = findViewById(R.id.buttonsubmitotp);
 
@@ -47,6 +57,7 @@ public class verifyenterotptwo extends AppCompatActivity {
         textview.setText(String.format("+91-%s", getIntent().getStringExtra("mobile")));
 
         getotpbackend = getIntent().getStringExtra("backendotp");
+        ownerId = getIntent().getStringExtra("ownerId");
 
         final ProgressBar progressbarVerifyOtp = findViewById(R.id.progressbar_verify_otp);
 
@@ -83,9 +94,37 @@ public class verifyenterotptwo extends AppCompatActivity {
                                 verifyButtonClick.setVisibility(View.VISIBLE);
 
                                 if(task.isSuccessful()){
-                                    Intent intent = new Intent(getApplicationContext(), Home.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    startActivity(intent);
+                                    databaseReference.orderByChild("phoneNo").equalTo(phoneNo).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if(snapshot.getValue() != null){
+                                                Toast.makeText(getApplicationContext(), "You are Already registered with us, Welcome Back", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(getApplicationContext(), Home.class);
+                                                intent.putExtra("ownerId", ownerId);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                startActivity(intent);
+                                            }else{
+                                                try{
+                                                    Owner owner = new Owner(ownerId,phoneNo);
+                                                    databaseReference.child(ownerId).setValue(owner);
+                                                } catch (Exception e){
+                                                    e.printStackTrace();
+                                                } finally {
+                                                    Intent intent = new Intent(getApplicationContext(), Home.class);
+                                                    intent.putExtra("ownerId", ownerId);
+                                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                    startActivity(intent);
+                                                }
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
                                 } else {
                                     Toast.makeText(verifyenterotptwo.this,"Enter correct OTP",Toast.LENGTH_SHORT).show();
 

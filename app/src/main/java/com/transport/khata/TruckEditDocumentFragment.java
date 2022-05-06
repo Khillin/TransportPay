@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.transport.khata.model.TruckDetails;
@@ -26,7 +27,7 @@ import com.transport.khata.model.TruckDetails;
  */
 public class TruckEditDocumentFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    String ownerid = "ownerid1";
+    String ownerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     Button truckType1;
     Button truckType2;
@@ -90,7 +91,6 @@ public class TruckEditDocumentFragment extends Fragment implements AdapterView.O
         Bundle bundle = this.getArguments();
         String TruckType = bundle.getString("truckType");
         String TruckNo = bundle.getString("truckNo");
-        String ownerId = bundle.getString(ownerid);
         editTruckSubmit = (Button) v.findViewById(R.id.submitEditTruck);
         truckType1 = v.findViewById(R.id.truckType1);
         truckType2 = v.findViewById(R.id.truckType2);
@@ -210,7 +210,7 @@ public class TruckEditDocumentFragment extends Fragment implements AdapterView.O
 //                    referenceTruck.child(TruckNo.toString()).child("regdNo").setValue(truckNo.getText().toString());
 //                    referenceTruck.child(TruckNo.toString()).child("Trucktype").setValue(truckType.getText().toString())
                 String truckNoTemp = truckNo.getText().toString();
-                TruckDetails newTruckDetails = new TruckDetails(ownerid.toString(), truckTypeField, truckNo.getText().toString());
+                TruckDetails newTruckDetails = new TruckDetails(ownerId.toString(), truckTypeField, truckNo.getText().toString());
                 referenceTruck.child(TruckNo.toString()).removeValue();
                 referenceTruck.child(truckNo.getText().toString()).setValue(newTruckDetails);
             }

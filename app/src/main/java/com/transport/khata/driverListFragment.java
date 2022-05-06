@@ -27,6 +27,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,7 +54,7 @@ public class driverListFragment extends Fragment {
 
     FirebaseDatabase rootNode;
     DatabaseReference referenceOwner;
-    String ownerid = "ownerid1";
+    String ownerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     Context context;
     Button searchContacts;
     TextInputEditText driverName;
@@ -76,16 +77,6 @@ public class driverListFragment extends Fragment {
     public driverListFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment driverListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static driverListFragment newInstance(String param1, String param2) {
         driverListFragment fragment = new driverListFragment();
         Bundle args = new Bundle();
@@ -158,7 +149,7 @@ public class driverListFragment extends Fragment {
 //                driverListClass drivers = dataSnapshot.child("ownerid1").child("drivers").getValue(driverListClass.class);
                 driverDetails.clear();
                 listview.setAdapter(null);
-                for (DataSnapshot snapshot : dataSnapshot.child(ownerid).child("drivers").getChildren()) {
+                for (DataSnapshot snapshot : dataSnapshot.child(ownerId).child("drivers").getChildren()) {
                     driverListClass driver = snapshot.getValue(driverListClass.class);
                     driverDetails.add(driver);
                 }
@@ -232,7 +223,7 @@ public class driverListFragment extends Fragment {
                 referenceOwner = rootNode.getReference("owner");
                 driverListClass driver = new driverListClass(0L, 0L, driverPhoneNo.getText().toString(),  driverName.getText().toString());
 
-                referenceOwner.child(ownerid).child("drivers").child(driverPhoneNo.getText().toString()).setValue(driver).addOnCompleteListener(task -> {
+                referenceOwner.child(ownerId).child("drivers").child(driverPhoneNo.getText().toString()).setValue(driver).addOnCompleteListener(task -> {
                     if (!task.isSuccessful()) {
                         Log.e("firebase", "Error pushing data", task.getException());
                     } else {

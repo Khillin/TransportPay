@@ -27,17 +27,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.File;
 import java.io.IOException;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EditDocumentFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class EditDocumentFragment extends Fragment {
 
     LinearLayout camera_open_id;
@@ -58,7 +55,7 @@ public class EditDocumentFragment extends Fragment {
     public final String APP_TAG = "MyCustomApp";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_BACK = 1045;
-    String ownerid = "ownerid1";
+    String ownerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     public final static int PICK_PHOTO_CODE_FRONT = 1046;
     public final static int PICK_PHOTO_CODE_BACK = 1096;
     Button uploadFromDeviceFront;
