@@ -14,18 +14,18 @@ import java.util.ArrayList;
 public class BaseAdapterTrips extends BaseAdapter {
     Context context;
 //    String partyNameList[];
-    String tripStatusList[];
+//    String tripStatusList[];
 //    String originList[];
 //    String destinationList[];
 //    String startDateList[];
     ArrayList<String> partyNameList = new ArrayList<>();
-    //        ArrayList<String> tripStatusList = new ArrayList<>();
+    ArrayList<String> tripStatusList = new ArrayList<>();
     ArrayList<String> originList = new ArrayList<>();
     ArrayList<String> destinationList = new ArrayList<>();
     ArrayList<String> startDateList = new ArrayList<>();
     LayoutInflater layoutInflater;
 
-    public BaseAdapterTrips(Context context, String[] tripStatusList, ArrayList<String> partyNameList, ArrayList<String> originList, ArrayList<String> destinationList, ArrayList<String> startDateList) {
+    public BaseAdapterTrips(Context context, ArrayList<String>  tripStatusList, ArrayList<String> partyNameList, ArrayList<String> originList, ArrayList<String> destinationList, ArrayList<String> startDateList) {
         this.context = context;
         this.tripStatusList = tripStatusList;
         this.partyNameList = partyNameList;
@@ -69,7 +69,7 @@ public class BaseAdapterTrips extends BaseAdapter {
         TextView startDateListView = (TextView) view.findViewById(R.id.start_date);
 
         partyNameListView.setText(partyNameList.get(i));
-        tripStatusListView.setText(tripStatusList[i]);
+        tripStatusListView.setText(tripStatusList.get(i));
         originListView.setText(originList.get(i));
         destinationListView.setText(originList.get(i));
         startDateListView.setText(startDateList.get(i));

@@ -33,7 +33,7 @@ public class ViewJobFragment extends Fragment {
     DatabaseReference tripListRef,partyNameRef,originRef,destinationRef,startDateRef,tripRef;
 
 //        String partyNameList[] = {"Sharma Tech","LucinTech","DelhiVery","FreshtoHome","Larsen"};
-        String tripStatusList[] = {"LR Recieved","POD Submitted","Settled","LR Recieved","LR Recieved"};
+//        String tripStatusList[] = {"LR Recieved","POD Submitted","Settled","LR Recieved","LR Recieved"};
 //        String originList[] = {"Mumbai","Delhi","Bengaluru","Delhi","Mathura"};
 //        String destinationList[] = {"Hyderabad","Gandhinagar","Mumbai","Ramgarh","Jodhpur"};
 //        String startDateList[] = {"12-04-2022","15-04-2022","24-03-2022","26-03-2022","27-03-2022"};
@@ -48,6 +48,7 @@ public class ViewJobFragment extends Fragment {
         ArrayList<String> originList = new ArrayList<>();
         ArrayList<String> destinationList = new ArrayList<>();
         ArrayList<String> startDateList = new ArrayList<>();
+        ArrayList<String> tripStatusList = new ArrayList<>();
     public ViewJobFragment() {
         // Required empty public constructor
     }
@@ -83,10 +84,12 @@ public class ViewJobFragment extends Fragment {
                                 String origin = snapshot.child("originAddress").getValue().toString();
                                 String destination = snapshot.child("destinationAddress").getValue().toString();
                                 String startDate = snapshot.child("startDate").getValue().toString();
+                                String tripStatus = snapshot.child("tripStatus").getValue().toString();
                                 partyNameList.add(partyName);
                                 originList.add(origin);
                                 destinationList.add(destination);
                                 startDateList.add(startDate);
+                                tripStatusList.add(tripStatus);
                                 BaseAdapterTrips baseAdapterTrips = new BaseAdapterTrips(getActivity().getApplicationContext(),tripStatusList,partyNameList,originList,destinationList,startDateList);
                                 tripListView.setAdapter(baseAdapterTrips);
                             }

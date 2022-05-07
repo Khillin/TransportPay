@@ -5,15 +5,15 @@ import java.util.Date;
 
 public class CreateTripHelperClass {
 
-    String partyName, driverName, truckNum, originAddress,
+    private String partyName, driverName, truckNum, originAddress,
             destinationAddress, billAmount,
             billType, tripId, tripStatus;
 
-    ArrayList<String> truckList = new ArrayList<>();
-    ArrayList <String> driverNameList = new ArrayList<>();
-    ArrayList <String> driverPhoneList = new ArrayList<>();
+    private ArrayList<String> truckList = new ArrayList<>();
+    private ArrayList <String> driverNameList = new ArrayList<>();
+    private ArrayList <String> driverPhoneList = new ArrayList<>();
 
-    String driverPhone;
+    private String driverPhone;
 
     public ArrayList<String> getTruckList() {
         return truckList;
@@ -177,5 +177,13 @@ public class CreateTripHelperClass {
 
     public void setTripId(String tripId) {
         this.tripId = tripId;
+    }
+
+    public String getTripStatus() {
+        return tripStatus;
+    }
+
+    public void setTripStatus(String tripStatus) {
+        this.tripStatus = tripStatus;
     }
 }

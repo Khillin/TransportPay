@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
@@ -26,10 +27,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,6 +57,7 @@ public class EditDocumentFragment extends Fragment {
     private static final int pic_id_back = 321;
     FirebaseDatabase rootNode;
     DatabaseReference referenceTruck, referenceOwner;
+    StorageReference storageReference;
     Boolean valuesChanged = false;
     File photoFile;
     public final String APP_TAG = "MyCustomApp";
@@ -92,7 +100,7 @@ public class EditDocumentFragment extends Fragment {
         truckNo = (EditText) view.findViewById(R.id.truckNo);
 
 //        truckType.setText(TruckType);
-
+        storageReference = FirebaseStorage.getInstance().getReference();
         rootNode = FirebaseDatabase.getInstance();
         referenceTruck = rootNode.getReference("Truck");
 
@@ -237,8 +245,12 @@ public class EditDocumentFragment extends Fragment {
 
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             // by this point we have the camera photo on disk
+            Uri contentUri = FileProvider.getUriForFile(requireActivity().getApplicationContext(),  BuildConfig.APPLICATION_ID + ".provider", photoFile);
+            String  fileName = photoFile.getName();
             Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
             frontImagechanged = true;
+
+            uploadImageToFirebase(fileName,contentUri);
 
             // RESIZE BITMAP, see section below
             // Load the taken image into a preview
@@ -250,9 +262,13 @@ public class EditDocumentFragment extends Fragment {
             getView().findViewById(R.id.textView4).setVisibility(View.GONE);
 
         } else  if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_BACK) {
+            Uri contentUri = FileProvider.getUriForFile(requireActivity().getApplicationContext(),  BuildConfig.APPLICATION_ID + ".provider", photoFile);
+            String  fileName = photoFile.getName();
             // by this point we have the camera photo on disk
             Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
             backImagechanged = true;
+
+            uploadImageToFirebase(fileName,contentUri);
 
             // RESIZE BITMAP, see section below
             // Load the taken image into a preview
@@ -289,6 +305,29 @@ public class EditDocumentFragment extends Fragment {
             getView().findViewById(R.id.textView5).setVisibility(View.GONE);
 
         }
+    }
+
+    private void uploadImageToFirebase(String fileName, Uri contentUri) {
+        StorageReference image = storageReference.child("images/"+fileName);
+        image.putFile(contentUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                image.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Log.d("TAG", "onSuccess: Uploaded Image URI is "+ uri.toString());
+
+                    }
+                });
+                Toast.makeText(getActivity(),"Image id Uploaded Successfully",Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(),"Upload Failed",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public File getPhotoFileUri(String front_back, String truckNo) {
