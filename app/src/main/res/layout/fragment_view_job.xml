@@ -4,16 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ViewJobFragment"
+    android:orientation="vertical"
     android:id="@+id/list_job">
 
-    <ListView
-        android:id="@+id/List_trip_info"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginVertical="2dp"
-        android:divider="#ffff"
-        android:dividerHeight="2dp"
-        android:clickable="true"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="5dp"
+            android:background="@drawable/backgroundbox"
+            android:queryHint="Search Here"
+            android:iconifiedByDefault="false"/>
+
+        <ListView
+            android:id="@+id/List_trip_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="2dp"
+            android:divider="#ffff"
+            android:dividerHeight="2dp"
+            android:clickable="true"/>
+
+    </LinearLayout>
 
 </FrameLayout>

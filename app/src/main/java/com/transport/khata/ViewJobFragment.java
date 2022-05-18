@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +30,8 @@ public class ViewJobFragment extends Fragment {
     //ownerId captured
     String ownerid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     String ownerId = FirebaseDatabase.getInstance().getReference().child("owner").child(ownerid).getKey().toString();
+    SearchView searchView;
+    BaseAdapterTrips baseAdapterTrips;
 
     DatabaseReference tripListRef,partyNameRef,originRef,destinationRef,startDateRef,tripRef;
 
@@ -59,6 +62,7 @@ public class ViewJobFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_view_job, container, false);
         tripListView = (ListView) view.findViewById(R.id.List_trip_info);
+        searchView = view.findViewById(R.id.search_view);
 
 
 
@@ -90,7 +94,7 @@ public class ViewJobFragment extends Fragment {
                                 destinationList.add(destination);
                                 startDateList.add(startDate);
                                 tripStatusList.add(tripStatus);
-                                BaseAdapterTrips baseAdapterTrips = new BaseAdapterTrips(getActivity().getApplicationContext(),tripStatusList,partyNameList,originList,destinationList,startDateList);
+                                baseAdapterTrips = new BaseAdapterTrips(getActivity().getApplicationContext(),tripStatusList,partyNameList,originList,destinationList,startDateList);
                                 tripListView.setAdapter(baseAdapterTrips);
                             }
 
@@ -114,6 +118,19 @@ public class ViewJobFragment extends Fragment {
                 Intent intent = new Intent(getActivity().getApplicationContext(), ViewJobActivity.class);
                 intent.putExtra("tripId",tripIdList.get(i).toString());
                 startActivity(intent);
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                baseAdapterTrips.getFilter().filter(newText);
+                return false;
             }
         });
 

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +63,8 @@ public class MyTruckFragment extends Fragment {
     String ownerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     ArrayList<TruckDetails> truckDetails = new ArrayList();
     Context context;
+    SearchView searchView;
+    truckDetailsAdapter adapter;
 
 
 
@@ -102,6 +106,7 @@ public class MyTruckFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_truck, container, false);
         View rowView = inflater.inflate(R.layout.row_item, null, false);
         context = getActivity();
+        searchView = view.findViewById(R.id.search_view);
 
         truck = rowView.findViewById(R.id.textView);
         regdNo = rowView.findViewById(R.id.regdNo);
@@ -145,54 +150,24 @@ public class MyTruckFragment extends Fragment {
             }
         };
         referenceOwner.addValueEventListener(postListener);
-//        referenceJob.get().addOnCompleteListener(task -> {
-//            if (!task.isSuccessful()) {
-//                Log.e("firebase", "Error getting data", task.getException());
-//            }
-//            else {
-//                Log.d("firebase", String.valueOf(task.getResult().getValue()));
-////                truck.setText(String.valueOf(task.getResult().getValue()));
-//                JSONObject jsonObject = null;
-//                ArrayList<String> truckTypeList = new ArrayList(), regdNoList = new ArrayList();
-//                try {
-//                    jsonObject = new JSONObject(String.valueOf(task.getResult().getValue()).trim());
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                Iterator<String> keys = jsonObject.keys();
-//
-//                while(keys.hasNext()) {
-//                    String key = keys.next();
-//                    try {
-//                        if (jsonObject.get(key) instanceof JSONObject) {
-//                            String owner = ownerId;
-//                            String Trucktype = ((JSONObject) jsonObject.get(key)).getString("TruckType");
-//                            String regdNoStr = ((JSONObject) jsonObject.get(key)).getString("regdNo");
-//                            TruckDetails truckDetails  = new TruckDetails(owner, Trucktype, regdNoStr);
-//                            truckDetails.setOwner(owner);
-//                            truckDetails.setTruckType(((JSONObject) jsonObject.get(key)).getString("TruckType"));
-//                            truckDetails.setRegdNo(((JSONObject) jsonObject.get(key)).getString("regdNo"));
-//                            truckTypeList.add(truckDetails.getTruckType());
-//                            regdNoList.add(truckDetails.getRegdNo());
-//                            truck.setText("Trucktype");
-//                            regdNo.setText("regdNoStr");
-//                            truckDArray.add(truckDetails);
-//                            viewsArray.add(rowView);
-//
-//                        }
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                truckDetailsAdapter adapter = new truckDetailsAdapter(getActivity(), truckDArray);
-//                listview.setAdapter(adapter);
-//            }
-//        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
         return view;
     }
 
     public void setTruckData(){
-        truckDetailsAdapter adapter = new truckDetailsAdapter(context, truckDetails);
+        adapter = new truckDetailsAdapter(context, truckDetails);
         listview.setAdapter(adapter);
     }
 

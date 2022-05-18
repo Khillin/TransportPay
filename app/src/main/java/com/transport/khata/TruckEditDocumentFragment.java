@@ -137,14 +137,6 @@ public class TruckEditDocumentFragment extends Fragment implements AdapterView.O
         }
 
 
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-//                R.array.truck_type, android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        truckType.setAdapter(adapter);
-//        int spinnerPosition = adapter.getPosition(TruckType);
-//        truckType.setSelection(spinnerPosition);
-
-
         rootNode = FirebaseDatabase.getInstance();
         referenceTruck = rootNode.getReference("Truck");
 

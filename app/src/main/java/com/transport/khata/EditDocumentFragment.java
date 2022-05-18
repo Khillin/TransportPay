@@ -1,9 +1,8 @@
 package com.transport.khata;
 
-import static androidx.core.os.BundleKt.bundleOf;
-import static androidx.fragment.app.FragmentKt.setFragmentResult;
-
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageDecoder;
@@ -13,6 +12,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
@@ -26,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -37,6 +39,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,7 +47,7 @@ import java.io.IOException;
 
 public class EditDocumentFragment extends Fragment {
 
-    LinearLayout camera_open_id;
+    LinearLayout camera_open_id,progressbar;
     Button editTruckSubmit;
     Button changeNumberBtn;
     Button changeTypeBtn;
@@ -105,6 +108,7 @@ public class EditDocumentFragment extends Fragment {
         referenceTruck = rootNode.getReference("Truck");
 
         camera_open_id = (LinearLayout) view.findViewById(R.id.camera_button);
+        progressbar = (LinearLayout) view.findViewById(R.id.progressbar);
         click_image_id = (ImageView) view.findViewById(R.id.click_image);
         camera_open_id_back = (LinearLayout) view.findViewById(R.id.camera_button_back);
         click_image_id_back = (ImageView) view.findViewById(R.id.click_image_back);
@@ -113,6 +117,12 @@ public class EditDocumentFragment extends Fragment {
         uploadFromDeviceBack = (Button) view.findViewById(R.id.uploadFromDeviceBack);
 
         changeNumberBtn = (Button) view.findViewById(R.id.makeEditableTType);
+        //Request for camera permission
+        if(ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(getActivity(), new String[]{
+                    Manifest.permission.CAMERA
+            },100);
+        }
 //        changeTypeBtn = (Button) view.findViewById(R.id.changeTruckType);
         // Camera_open button is for open the camera
         // and add the setOnClickListener in this button
@@ -256,7 +266,6 @@ public class EditDocumentFragment extends Fragment {
             // Load the taken image into a preview
             click_image_id.setImageBitmap(takenImage);
             click_image_id.setVisibility(View.VISIBLE);
-            click_image_id.setVisibility(View.VISIBLE);
             uploadFromDeviceFront.setVisibility(View.GONE);
             camera_open_id.setVisibility(View.GONE);
             getView().findViewById(R.id.textView4).setVisibility(View.GONE);
@@ -308,14 +317,27 @@ public class EditDocumentFragment extends Fragment {
     }
 
     private void uploadImageToFirebase(String fileName, Uri contentUri) {
-        StorageReference image = storageReference.child("images/"+fileName);
+        StorageReference image = storageReference.child("images/"+ownerId +"/"+fileName);
+        uploadFromDeviceFront.setVisibility(View.GONE);
+        camera_open_id.setVisibility(View.GONE);
+        getView().findViewById(R.id.textView4).setVisibility(View.GONE);
+        progressbar.setVisibility(View.VISIBLE);
         image.putFile(contentUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                getView().findViewById(R.id.textView4).setVisibility(View.GONE);
                 image.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
                         Log.d("TAG", "onSuccess: Uploaded Image URI is "+ uri.toString());
+                        image.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Picasso.get().load(uri).into(click_image_id);
+                                click_image_id.setVisibility(View.VISIBLE);
+                                progressbar.setVisibility(View.GONE);
+                            }
+                        });
 
                     }
                 });
@@ -343,23 +365,28 @@ public class EditDocumentFragment extends Fragment {
 
         String fileName = "";
 
-
-        if (front_back.equals("front")) {
-            timeStampFront = System.nanoTime();
-            fileName = "FrontRC_" + timeStampFront +"_"+ key.toString()+".jpg";
-        } else {
-            timeStampBack = System.nanoTime();
-            fileName = "BackRC_" + timeStampBack +"_"+ key.toString()+".jpg";
+        if(documentFor.equals("truck")){
+            if (front_back.equals("front")) {
+                timeStampFront = System.nanoTime();
+                fileName = "FrontRC_" + key.toString()+"_"+timeStampFront+".jpg";
+            } else {
+                timeStampBack = System.nanoTime();
+                fileName = "BackRC_" + key.toString()+"_"+timeStampBack+".jpg";
+            }
+        } else if (documentFor.equals("driver")){
+            if (front_back.equals("front")) {
+                timeStampFront = System.nanoTime();
+                fileName = "FrontDL_" + key.toString()+"_"+timeStampFront+".jpg";
+            } else {
+                timeStampBack = System.nanoTime();
+                fileName = "BackDL_" + key.toString()+"_"+timeStampBack+".jpg";
+            }
         }
-
 
         // Return the file target for the photo based on filename
         File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
 
-
         return file;
-
-
     }
 
     // Trigger gallery selection for a photo

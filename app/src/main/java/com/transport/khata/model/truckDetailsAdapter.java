@@ -1,6 +1,7 @@
 package com.transport.khata.model;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -22,14 +25,16 @@ import com.transport.khata.TruckEditDocumentFragment;
 
 import java.util.ArrayList;
 
-public class truckDetailsAdapter extends ArrayAdapter<TruckDetails> {
+public class truckDetailsAdapter extends ArrayAdapter<TruckDetails>{
 
     private Context contextVar;
+    ArrayList<TruckDetails> truckArrayListAll;
 
 
     public truckDetailsAdapter(@NonNull Context context, ArrayList<TruckDetails> arrayList) {
         super(context,0, arrayList);
         this.contextVar = context;
+        this.truckArrayListAll= new ArrayList<TruckDetails>(arrayList);
     }
 
     @NonNull
@@ -70,6 +75,7 @@ public class truckDetailsAdapter extends ArrayAdapter<TruckDetails> {
                         args.putString("truckNo", currentNumberPosition.getRegdNo());
                         args.putString("truckType", currentNumberPosition.getTruckType());
                         args.putString("ownerId", currentNumberPosition.getOwner());
+                        args.putString("documentFor", "trucks");
                         FragmentManager fragmentManager = ((AppCompatActivity)getContext()).getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         editFragment.setArguments(args);
@@ -83,9 +89,9 @@ public class truckDetailsAdapter extends ArrayAdapter<TruckDetails> {
             }
         });
 
-//        if(position % 2 == 0){
-//            currentItemView.setBackgroundColor(Color.parseColor("#F3F5F7"));
-//        }
+        if(position % 2 == 0){
+            currentItemView.setBackgroundColor(Color.parseColor("#F3F5F7"));
+        }
 
         currentItemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,4 +113,49 @@ public class truckDetailsAdapter extends ArrayAdapter<TruckDetails> {
 
         return currentItemView;
     }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            ArrayList<TruckDetails> arrayListFilter= new ArrayList<>();
+            String searchText = constraint.toString().toLowerCase();
+            String[] split = searchText.split(",");
+            ArrayList<String > searchArr = new ArrayList<>(split.length);
+
+            if(searchText.isEmpty()){
+                arrayListFilter=truckArrayListAll;
+            } else {
+                for(String tsplit:split){
+                    String trim = tsplit.trim();
+                    if(trim.length()>0){
+                        searchArr.add(trim);
+                    }
+
+                    for(TruckDetails truck : truckArrayListAll){
+                        if(truck.getRegdNo().toLowerCase().trim().contains(searchText)){
+                            arrayListFilter.add(truck);
+                        }
+                    }
+                }
+
+            }
+            results.count=arrayListFilter.size();
+            results.values=arrayListFilter;
+            return results;
+
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            clear();
+            addAll((ArrayList<TruckDetails>) results.values);
+            notifyDataSetChanged();
+        }
+    };
 }
