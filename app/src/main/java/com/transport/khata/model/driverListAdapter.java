@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Filter;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -25,9 +26,11 @@ import java.util.ArrayList;
 
 public class driverListAdapter extends ArrayAdapter<driverListClass> {
     Context contextVar;
+    ArrayList<driverListClass> driverArrayListAll;
     public driverListAdapter(@NonNull Context context, ArrayList<driverListClass> arrayList) {
         super(context,0, arrayList);
         contextVar = context;
+        this.driverArrayListAll= new ArrayList<driverListClass>(arrayList);
     }
 
     @NonNull
@@ -100,4 +103,49 @@ public class driverListAdapter extends ArrayAdapter<driverListClass> {
 
         return currentItemView;
     }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            ArrayList<driverListClass> arrayListFilter= new ArrayList<>();
+            String searchText = constraint.toString().toLowerCase();
+            String[] split = searchText.split(",");
+            ArrayList<String > searchArr = new ArrayList<>(split.length);
+
+            if(searchText.isEmpty()){
+                arrayListFilter=driverArrayListAll;
+            } else {
+                for(String tsplit:split){
+                    String trim = tsplit.trim();
+                    if(trim.length()>0){
+                        searchArr.add(trim);
+                    }
+
+                    for(driverListClass driver : driverArrayListAll){
+                        if(driver.getdrivername().toLowerCase().trim().contains(searchText)){
+                            arrayListFilter.add(driver);
+                        }
+                    }
+                }
+
+            }
+            results.count=arrayListFilter.size();
+            results.values=arrayListFilter;
+            return results;
+
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            clear();
+            addAll((ArrayList<driverListClass>) results.values);
+            notifyDataSetChanged();
+        }
+    };
 }

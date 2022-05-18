@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -50,6 +51,7 @@ public class driverListFragment extends Fragment {
     ListView listview;
     ExtendedFloatingActionButton addNewDriver;
     BottomSheetDialog dialogBuilderDriver;
+    SearchView searchView;
 
 
     FirebaseDatabase rootNode;
@@ -60,6 +62,7 @@ public class driverListFragment extends Fragment {
     TextInputEditText driverName;
     TextInputEditText driverPhoneNo;
     ImageButton back;
+    driverListAdapter adapter;
     private static final int CONTACT_PERMISSION_CODE = 100;
 
 
@@ -102,6 +105,7 @@ public class driverListFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_driver_list, container, false);
         View row_view = getLayoutInflater().inflate(R.layout.row_item, null, false);
         context = getActivity();
+        searchView = view.findViewById(R.id.search_view);
 
 
 
@@ -133,12 +137,6 @@ public class driverListFragment extends Fragment {
 
         listview = view.findViewById(R.id.driverList);
 
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.moreOptions, android.R.layout.simple_spinner_item);
-//
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-//
-//        driverOptions.setAdapter(adapter);
-
 
 
 
@@ -165,13 +163,26 @@ public class driverListFragment extends Fragment {
         };
         referenceOwner.addValueEventListener(postListener);
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
 
         return view;
     }
 
 
     public void setData(){
-        driverListAdapter adapter = new driverListAdapter(context, driverDetails);
+        adapter = new driverListAdapter(context, driverDetails);
         listview.setAdapter(adapter);
     }
 
