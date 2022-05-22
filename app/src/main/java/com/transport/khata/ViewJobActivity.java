@@ -1,12 +1,16 @@
 package com.transport.khata;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.transport.khata.adapter.BaseAdapterInterface;
 import com.transport.khata.adapter.DriverTripInfoAdapter;
 import com.transport.khata.model.CreateTripHelperClass;
 import com.transport.khata.model.driverListAdapter;
@@ -32,10 +37,12 @@ import com.transport.khata.model.tripDetailsAdapter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class ViewJobActivity extends AppCompatActivity {
+
 
     String ownerid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -155,56 +162,6 @@ public class ViewJobActivity extends AppCompatActivity {
                 Log.w("TAG", "loadPost:onCancelled", databaseError.toException());
             }
         };
-
-
-
-//        DatabaseReference driverNameRef = tripRef.child("driverNameList");
-//        DatabaseReference driverPhoneRef = tripRef.child("driverPhoneList");
-//        DatabaseReference truckRef = tripRef.child("truckList");
-//        driverNameRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for(DataSnapshot data: snapshot.getChildren()){
-//                    driverNameList.add(data.getValue().toString());
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//
-//        driverPhoneRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for(DataSnapshot data: snapshot.getChildren()){
-//                    driverPhoneList.add(data.getValue().toString());
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//
-//        truckRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for(DataSnapshot data: snapshot.getChildren()){
-//                    truckList.add(data.getValue().toString());
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//
-//        DriverTripInfoAdapter adapter = new DriverTripInfoAdapter(getApplicationContext(), truckList,driverNameList,driverPhoneList);
-//        listview.setAdapter(adapter);
 
         tripRef.addValueEventListener(postListener);
 

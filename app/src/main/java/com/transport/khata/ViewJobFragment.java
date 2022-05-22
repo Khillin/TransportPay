@@ -1,16 +1,26 @@
 package com.transport.khata;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -20,14 +30,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.transport.khata.adapter.BaseAdapterInterface;
 import com.transport.khata.adapter.BaseAdapterTrips;
 import com.transport.khata.model.CreateTripHelperClass;
 
+import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 
 
-public class ViewJobFragment extends Fragment {
+public class ViewJobFragment extends Fragment implements BaseAdapterInterface {
     //ownerId captured
+    int SELECT_IMAGE_CODE = 1;
     String ownerid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     String ownerId = FirebaseDatabase.getInstance().getReference().child("owner").child(ownerid).getKey().toString();
     SearchView searchView;
@@ -52,13 +66,19 @@ public class ViewJobFragment extends Fragment {
         ArrayList<String> destinationList = new ArrayList<>();
         ArrayList<String> startDateList = new ArrayList<>();
         ArrayList<String> tripStatusList = new ArrayList<>();
+
     public ViewJobFragment() {
         // Required empty public constructor
+    }
+
+    public ViewJobFragment ViewJobFragment() {
+        return this;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         View view = inflater.inflate(R.layout.fragment_view_job, container, false);
         tripListView = (ListView) view.findViewById(R.id.List_trip_info);
@@ -94,7 +114,7 @@ public class ViewJobFragment extends Fragment {
                                 destinationList.add(destination);
                                 startDateList.add(startDate);
                                 tripStatusList.add(tripStatus);
-                                baseAdapterTrips = new BaseAdapterTrips(getActivity().getApplicationContext(),tripStatusList,partyNameList,originList,destinationList,startDateList);
+                                baseAdapterTrips = new BaseAdapterTrips(getActivity(),tripStatusList,partyNameList,originList,destinationList,startDateList,ViewJobFragment());
                                 tripListView.setAdapter(baseAdapterTrips);
                             }
 
@@ -134,8 +154,40 @@ public class ViewJobFragment extends Fragment {
             }
         });
 
+        //Request for camera permission
+        if(ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(getActivity(), new String[]{
+                    Manifest.permission.CAMERA
+            },100);
+        }
+
+
         // Inflate the layout for this fragment
         return view;
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if (requestCode == 1){
+            try{
+                Uri imageUri = data.getData();
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(),imageUri);
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    @Override
+    public void onClickBtn() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+//                Intent intent = new Intent(context, ViewJobFragment.class);
+            startActivityForResult(Intent.createChooser(intent,"Select Picture"),SELECT_IMAGE_CODE);
 
     }
 }

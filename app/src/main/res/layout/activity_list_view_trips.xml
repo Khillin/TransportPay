@@ -194,14 +194,32 @@
                 android:src="@drawable/underline"
                 android:layout_marginVertical="5dp"/>
 
-            <TextView
-                android:layout_width="match_parent"
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textSize="10sp"
-                android:textColor="@color/colorTextPrimary"
-                android:textStyle="italic"
-                android:text="upload documents for this trip in details"/>
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="2dp"
+                android:layout_gravity="center_vertical|center_horizontal">
+
+                <Button
+                    android:id="@+id/status_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:text="Upload LR" />
+
+                <Button
+                    android:id="@+id/complete_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:backgroundTint="#4CAF50"
+                    android:text="completed"
+                    android:layout_marginLeft="10dp"/>
+
+            </RelativeLayout>
 
         </LinearLayout>
 

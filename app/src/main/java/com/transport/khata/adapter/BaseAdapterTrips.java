@@ -1,21 +1,40 @@
 package com.transport.khata.adapter;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.location.GnssAntennaInfo;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-import com.transport.khata.R;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
+import com.google.firebase.database.ValueEventListener;
+import com.transport.khata.R;
+import com.transport.khata.ViewJobFragment;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
 public class BaseAdapterTrips extends BaseAdapter implements Filterable {
     Context context;
+    BaseAdapterInterface buttonListener;
     ArrayList<String> partyNameList = new ArrayList<>();
     ArrayList<String> tripStatusList = new ArrayList<>();
     ArrayList<String> originList = new ArrayList<>();
@@ -28,7 +47,7 @@ public class BaseAdapterTrips extends BaseAdapter implements Filterable {
     ArrayList<String> startDateListAll = new ArrayList<>();
     LayoutInflater layoutInflater;
 
-    public BaseAdapterTrips(Context context, ArrayList<String>  tripStatusList, ArrayList<String> partyNameList, ArrayList<String> originList, ArrayList<String> destinationList, ArrayList<String> startDateList) {
+    public BaseAdapterTrips(Context context, ArrayList<String>  tripStatusList, ArrayList<String> partyNameList, ArrayList<String> originList, ArrayList<String> destinationList, ArrayList<String> startDateList, Fragment buttonListener) {
         this.context = context;
         this.tripStatusList = tripStatusList;
         this.partyNameList = partyNameList;
@@ -40,8 +59,10 @@ public class BaseAdapterTrips extends BaseAdapter implements Filterable {
         this.originListAll = originList;
         this.destinationListAll = destinationList;
         this.startDateListAll = startDateList;
+        this.buttonListener = (BaseAdapterInterface) buttonListener;
         layoutInflater = LayoutInflater.from(context);
     }
+
 
     @Override
     public int getCount() {
@@ -66,12 +87,23 @@ public class BaseAdapterTrips extends BaseAdapter implements Filterable {
         TextView originListView = (TextView) view.findViewById(R.id.origin);
         TextView destinationListView = (TextView) view.findViewById(R.id.destination);
         TextView startDateListView = (TextView) view.findViewById(R.id.start_date);
+        Button upload = view.findViewById(R.id.status_update);
 
         partyNameListView.setText(partyNameList.get(i));
         tripStatusListView.setText(tripStatusList.get(i));
         originListView.setText(originList.get(i));
         destinationListView.setText(originList.get(i));
         startDateListView.setText(startDateList.get(i));
+
+
+        //gallery option
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttonListener.onClickBtn();
+            }
+        });
+
         return view;
     }
 
@@ -151,4 +183,8 @@ public class BaseAdapterTrips extends BaseAdapter implements Filterable {
             notifyDataSetChanged();
         }
     };
+
+    public  void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("MyAdapter", "onActivityResult");
+    }
 }
