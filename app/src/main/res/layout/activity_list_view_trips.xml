@@ -208,6 +208,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
+                    android:focusableInTouchMode="false"
+                    android:focusable="false"
                     android:text="Upload LR" />
 
                 <Button
@@ -215,11 +217,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10dp"
                     android:backgroundTint="#4CAF50"
-                    android:text="completed"
-                    android:layout_marginLeft="10dp"/>
+                    android:focusableInTouchMode="false"
+                    android:focusable="false"
+                    android:text="MARk as complete" />
 
             </RelativeLayout>
+
+<!--            <Button-->
+<!--                android:id="@+id/view_dtl"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:text="View Details"/>-->
 
         </LinearLayout>
 

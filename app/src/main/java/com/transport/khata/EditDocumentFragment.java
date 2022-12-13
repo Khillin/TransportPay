@@ -63,7 +63,7 @@ public class EditDocumentFragment extends Fragment {
     StorageReference storageReference;
     Boolean valuesChanged = false;
     File photoFile;
-    public final String APP_TAG = "MyCustomApp";
+    public final String APP_TAG = "TransportKhata";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_BACK = 1045;
     String ownerId = FirebaseAuth.getInstance().getCurrentUser().getUid();

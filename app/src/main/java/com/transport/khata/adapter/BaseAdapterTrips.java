@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -27,14 +28,17 @@ import androidx.fragment.app.FragmentActivity;
 import com.google.firebase.database.ValueEventListener;
 import com.transport.khata.R;
 import com.transport.khata.ViewJobFragment;
+import com.transport.khata.model.Constants;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class BaseAdapterTrips extends BaseAdapter implements Filterable {
     Context context;
     BaseAdapterInterface buttonListener;
+    ArrayList<String> tripIdList = new ArrayList<>();
     ArrayList<String> partyNameList = new ArrayList<>();
     ArrayList<String> tripStatusList = new ArrayList<>();
     ArrayList<String> originList = new ArrayList<>();
@@ -45,10 +49,11 @@ public class BaseAdapterTrips extends BaseAdapter implements Filterable {
     ArrayList<String> originListAll = new ArrayList<>();
     ArrayList<String> destinationListAll = new ArrayList<>();
     ArrayList<String> startDateListAll = new ArrayList<>();
-    LayoutInflater layoutInflater;
+//    LayoutInflater layoutInflater;
 
-    public BaseAdapterTrips(Context context, ArrayList<String>  tripStatusList, ArrayList<String> partyNameList, ArrayList<String> originList, ArrayList<String> destinationList, ArrayList<String> startDateList, Fragment buttonListener) {
+    public BaseAdapterTrips(Context context, ArrayList<String>  tripIdList , ArrayList<String>  tripStatusList, ArrayList<String> partyNameList, ArrayList<String> originList, ArrayList<String> destinationList, ArrayList<String> startDateList, Fragment buttonListener) {
         this.context = context;
+        this.tripIdList = tripIdList;
         this.tripStatusList = tripStatusList;
         this.partyNameList = partyNameList;
         this.originList = originList;
@@ -60,7 +65,7 @@ public class BaseAdapterTrips extends BaseAdapter implements Filterable {
         this.destinationListAll = destinationList;
         this.startDateListAll = startDateList;
         this.buttonListener = (BaseAdapterInterface) buttonListener;
-        layoutInflater = LayoutInflater.from(context);
+//        layoutInflater = LayoutInflater.from(context);
     }
 
 
@@ -81,28 +86,67 @@ public class BaseAdapterTrips extends BaseAdapter implements Filterable {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = layoutInflater.inflate(R.layout.activity_list_view_trips,null);
+//        view = layoutInflater.inflate(R.layout.activity_list_view_trips,null);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        view = inflater.inflate(R.layout.activity_list_view_trips, null, false);
         TextView partyNameListView = (TextView) view.findViewById(R.id.party_name);
         TextView tripStatusListView = (TextView) view.findViewById(R.id.trip_status);
         TextView originListView = (TextView) view.findViewById(R.id.origin);
         TextView destinationListView = (TextView) view.findViewById(R.id.destination);
         TextView startDateListView = (TextView) view.findViewById(R.id.start_date);
         Button upload = view.findViewById(R.id.status_update);
+        Button complete = view.findViewById(R.id.complete_update);
 
         partyNameListView.setText(partyNameList.get(i));
         tripStatusListView.setText(tripStatusList.get(i));
         originListView.setText(originList.get(i));
         destinationListView.setText(originList.get(i));
         startDateListView.setText(startDateList.get(i));
+        String tripId = tripIdList.get(i);
+        String tripStatus = tripStatusList.get(i);
 
+        if(tripStatusList.get(i).equalsIgnoreCase(Constants.status_jrny_start)){
+            upload.setText("UPLOAD LR");
+        } else if(tripStatusList.get(i).equalsIgnoreCase(Constants.status_lr_recvd)){
+            upload.setText("UPLOAD POD");
+        } else if(tripStatusList.get(i).equalsIgnoreCase(Constants.status_pod_recvd)){
+            upload.setText("SETTLED");
+        } else if(tripStatusList.get(i).equalsIgnoreCase(Constants.status_settlement)){
+            upload.setText("COMPLETED");
+            upload.setEnabled(false);
+            complete.setVisibility(View.INVISIBLE);
+        }
 
         //gallery option
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buttonListener.onClickBtn();
+                try{
+                    buttonListener.onClickBtn(view,tripId,tripStatus,false);
+//                    TimeUnit.SECONDS.sleep(1);
+
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
+
+        complete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    buttonListener.onClickBtn(view,tripId,tripStatus,true);
+//                    tripStatusList.set(i,Constants.status_settlement);
+//                    upload.setText("COMPLETED");
+//                    upload.setEnabled(false);
+//                    complete.setVisibility(View.INVISIBLE);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
 
         return view;
     }
@@ -183,8 +227,4 @@ public class BaseAdapterTrips extends BaseAdapter implements Filterable {
             notifyDataSetChanged();
         }
     };
-
-    public  void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("MyAdapter", "onActivityResult");
-    }
 }

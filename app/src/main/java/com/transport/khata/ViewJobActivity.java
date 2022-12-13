@@ -16,16 +16,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 import com.transport.khata.adapter.BaseAdapterInterface;
 import com.transport.khata.adapter.DriverTripInfoAdapter;
 import com.transport.khata.model.CreateTripHelperClass;
@@ -44,21 +51,23 @@ import java.util.Iterator;
 public class ViewJobActivity extends AppCompatActivity {
 
 
-    String ownerid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    String ownerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-    String ownerId = FirebaseDatabase.getInstance().getReference().child("owner").child(ownerid).getKey().toString();
+//    String ownerId = FirebaseDatabase.getInstance().getReference().child("owner").child(ownerid).getKey().toString();
 
     ImageButton Back;
     TextView editBtn, saveBtn, advAmt, advAmtEdit,
     editBtn2, saveBtn2, billAmt, billAmtEdit;
 
     DatabaseReference tripRef;
+    StorageReference storageReference;
     String tripId = null;
 
     ArrayList<String> truckList = new ArrayList<>();
     ArrayList <String> driverNameList = new ArrayList<>();
     ArrayList <String> driverPhoneList = new ArrayList<>();
     ListView listview;
+    ImageView viewLR,viewPOD;
 
 
 
@@ -68,6 +77,7 @@ public class ViewJobActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_job);
         tripId = getIntent().getStringExtra("tripId");
         tripRef = FirebaseDatabase.getInstance().getReference("Trips").child(tripId);
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         advAmt = findViewById(R.id.advance_amount);
         advAmtEdit = findViewById(R.id.advance_amount_edit);
@@ -77,6 +87,8 @@ public class ViewJobActivity extends AppCompatActivity {
         billAmtEdit = findViewById(R.id.bill_amount_edit);
         editBtn2 = findViewById(R.id.ba_edit_btn);
         saveBtn2 = findViewById(R.id.ba_save_btn);
+        viewLR = findViewById(R.id.view_LR);
+        viewPOD = findViewById(R.id.view_POD);
 
         listview = findViewById(R.id.list_driver_info);
 
@@ -136,6 +148,8 @@ public class ViewJobActivity extends AppCompatActivity {
                 tripRef.child("billAmount").setValue(advAmt.getText().toString());
             }
         });
+
+        uploadDocIfExist();
         //**********************//
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -165,6 +179,24 @@ public class ViewJobActivity extends AppCompatActivity {
 
         tripRef.addValueEventListener(postListener);
 
+
+    }
+
+    private void uploadDocIfExist() {
+        String fileName = "LR" +"_"+ownerId+"_"+tripId;
+        StorageReference image = storageReference.child("images/"+ownerId +"/"+fileName +".jpg");
+        image.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(viewLR);
+                viewLR.setVisibility(View.VISIBLE);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), "LR not Found, please upload first to view", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
